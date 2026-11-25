@@ -112,8 +112,8 @@ int main(){
                 }
                 cv::imshow("Gray Frames", gray);
 
-
-        /*      blur_kernel<<<grid, block>>>(d_input, d_blur, frame.cols, frame.rows);
+		launch_blur_kernel(d_input, d_blur, frame.cols, frame.rows, grid, block);
+              	//blur_kernel<<<grid, block>>>(d_input, d_blur, frame.cols, frame.rows);
                 cudaDeviceSynchronize();
                 err = cudaMemcpy(blur.data, d_blur, total_bytes, cudaMemcpyDeviceToHost);
                 if(err != cudaSuccess){
@@ -122,7 +122,7 @@ int main(){
                         return -1;
                 }
                 cv::imshow("Blur Frames", blur);
-        */
+        
 
                 cout<<"======Frame Captured Successfully======" << endl;
                 cout<< "width: " << frame.cols << endl;

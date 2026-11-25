@@ -17,4 +17,12 @@ void launch_gray_kernel(const unsigned char* d_input,
                         dim3 grid,
                         dim3 block);
 
+void launch_blur_kernel(const unsigned char* d_input,
+                        unsigned char* d_blur,
+                        int width,
+                        int height,
+                        dim3 grid,
+                        dim3 block);
+
+
 #endif
