@@ -40,9 +40,9 @@ void blur_kernel(const unsigned char* d_input, unsigned char* d_blur, int width,
 
                 int sumB = 0, sumG = 0, sumR = 0;
 
-                for(int dy=-3; dy<=3; dy++){
+                for(int dy=-1; dy<=1; dy++){
 
-                        for(int dx = -3; dx <= 3; dx++){
+                        for(int dx = -1; dx <= 1; dx++){
 
                                 int yy = y + dy;
                                 int xx = x + dx;
@@ -65,8 +65,7 @@ void blur_kernel(const unsigned char* d_input, unsigned char* d_blur, int width,
         }
 }
 	
-	
-void launch_inversion_kernel(const unsigned char* d_input,
+cudaError_t launch_inversion_kernel(const unsigned char* d_input,
                              unsigned char* d_invert,
                              int width,
                              int height,
@@ -74,9 +73,11 @@ void launch_inversion_kernel(const unsigned char* d_input,
                              dim3 block) {
 
         inversion_kernel<<<grid, block>>>(d_input, d_invert, width, height);
+
+	return cudaGetLastError();
 }
 
-void launch_gray_kernel(const unsigned char* d_input,
+cudaError_t launch_gray_kernel(const unsigned char* d_input,
                         unsigned char* d_gray,
                         int width,
                         int height,
@@ -84,10 +85,12 @@ void launch_gray_kernel(const unsigned char* d_input,
                         dim3 block) {
         
 	gray_kernel<<<grid, block>>>(d_input, d_gray, width, height);
+
+	return cudaGetLastError();
 }
 
 
-void launch_blur_kernel(const unsigned char* d_input,
+cudaError_t launch_blur_kernel(const unsigned char* d_input,
                         unsigned char* d_blur,
                         int width,
                         int height,
@@ -95,4 +98,8 @@ void launch_blur_kernel(const unsigned char* d_input,
                         dim3 block) {
         
 	blur_kernel<<<grid, block>>>(d_input, d_blur, width, height);
+
+	return cudaGetLastError();
 }
+
+
