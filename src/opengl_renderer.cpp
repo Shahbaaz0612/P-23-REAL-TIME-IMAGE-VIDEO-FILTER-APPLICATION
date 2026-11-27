@@ -57,7 +57,6 @@ bool OpenGLRenderer::initialize( int width, int height, int channels)
     glfwMakeContextCurrent(window);
 
     // Initialize GLEW
-    glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
     {
         cout << "GLEW initialization failed!" << endl;
@@ -65,23 +64,15 @@ bool OpenGLRenderer::initialize( int width, int height, int channels)
         return false;
     }
 
-    // Clear any initialization error
-    while (glGetError() != GL_NO_ERROR)
-    {
-    }
-
-    // Enable V-Sync
-    glfwSwapInterval(1);
-
     cout << "OpenGL initialized successfully!" << endl;
 
-    // Create texture
+  /*  // Create texture
     if (!createTexture())
     {
         cleanup();
         return false;
     }
-
+*/
     return true;
 }
 
