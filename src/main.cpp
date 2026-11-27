@@ -132,9 +132,9 @@ int main()
     cout << "PBO Memory: " << pboSize << " bytes" << endl;
 
 
-    // =========================================
-    // 4. INITIALIZE OPENGL
-    // =========================================
+    // =================================================
+    // 4. INITIALIZE OPENGL(window and context creation)
+    // =================================================
 
     OpenGLRenderer renderer;
 
@@ -417,7 +417,17 @@ int main()
 
 
         // -------------------------------------
-        // Step 7: Update OpenGL texture from PBO
+        // Step 7: Create OpenGL texture
+        // -------------------------------------
+
+        if (!renderer.createTexture())
+        {       
+            renderer.cleanup();
+            return false;
+        }
+
+        // -------------------------------------
+        // Step 8: Update OpenGL texture from PBO
         // -------------------------------------
 
         if (!renderer.updateTextureFromPBO(interop.getPBO()))
@@ -430,7 +440,7 @@ int main()
 
 
         // -------------------------------------
-        // Step 8: Process OpenGL window events
+        // Step 9: Process OpenGL window events
         // -------------------------------------
 
         renderer.pollEvents();
@@ -438,7 +448,7 @@ int main()
 
 
     // =========================================
-    // 9. CLEANUP
+    // 10. CLEANUP
     // =========================================
 
     cout << "\nReleasing resources..." << endl;
