@@ -27,7 +27,7 @@ bool CudaGLInterop::createPBO(size_t size)
     // Allocating memory for PBO.
     glBufferData(
         GL_PIXEL_UNPACK_BUFFER,
-        static_cast<GLsizeiptr>(size),
+        size,
         nullptr,
         GL_STREAM_DRAW
     );
